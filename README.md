@@ -10,6 +10,8 @@ Para executar a aplicao se faz necessario uma instancia do banco de dados Mysql.
 - **TECNOLOGIAS**
   
     Java 17
+
+    IntelliJ
       
     Gradle
   
