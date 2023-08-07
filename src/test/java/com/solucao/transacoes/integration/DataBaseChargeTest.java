@@ -50,7 +50,7 @@ public class DataBaseChargeTest {
     void criarConta(){
 
         if(!accountRepository.findByDocumentNumber(documentNumber).isPresent())
-            accountRepository.save(new Account(null,documentNumber));
+            accountRepository.save(new Account(null,documentNumber, new BigDecimal("5000")));
 
         var account = accountRepository.findByDocumentNumber(documentNumber).get();
     }

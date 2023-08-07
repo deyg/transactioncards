@@ -14,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.MessageSource;
 
+import java.math.BigDecimal;
+
 @SpringBootTest
 public class AccountIntegrationTest {
 
@@ -35,7 +37,7 @@ public class AccountIntegrationTest {
     @BeforeAll
     public static void init(){
 
-         zeroAccountDto = new AccountDto(null,"00000000000");
+         zeroAccountDto = new AccountDto(null,"00000000000", new BigDecimal("5000"));
     }
 
     @Test

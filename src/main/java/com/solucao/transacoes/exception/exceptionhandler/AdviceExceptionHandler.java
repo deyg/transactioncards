@@ -34,7 +34,7 @@ public class AdviceExceptionHandler extends ResponseEntityExceptionHandler {
     public ResponseEntity<Object> accountDuplicatedBusinessException(
             AccountDuplicatedBusinessException ex, WebRequest request) {
 
-        return getObjectResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR, ex.getMessage());
+        return getObjectResponseEntity(HttpStatus.BAD_REQUEST, ex.getMessage());
 
     }
 

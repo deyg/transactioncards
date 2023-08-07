@@ -9,6 +9,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -23,5 +25,10 @@ public class AccountDto {
     @Size(max = 11, min = 11, message = "Invalid Document Number, Size should be 11")
     @Pattern(regexp = "^[0-9]+$", message = "The document number should only contain numbers")
     private String documentNumber;
+
+    @JsonProperty("available_creditLimit")
+    private BigDecimal availableCreditLimit;
+
+
 
 }
