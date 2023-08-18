@@ -1,11 +1,11 @@
-package com.solucao.transacoes.service;
+package com.solucao.transacoes.dominio.aplicacao;
 
-import com.solucao.transacoes.dto.TransactionDto;
-import com.solucao.transacoes.model.Account;
-import com.solucao.transacoes.model.Transaction;
-import com.solucao.transacoes.repository.AccountRepository;
-import com.solucao.transacoes.repository.OperationTypeRepository;
-import com.solucao.transacoes.repository.TransactionRepository;
+import com.solucao.transacoes.dominio.dto.TransactionDto;
+import com.solucao.transacoes.infraestrutura.adaptador.banco.jpaentity.AccountJpaEntity;
+import com.solucao.transacoes.infraestrutura.adaptador.banco.jpaentity.Transaction;
+import com.solucao.transacoes.infraestrutura.adaptador.banco.jparepository.AccountRepository;
+import com.solucao.transacoes.infraestrutura.adaptador.banco.jparepository.OperationTypeRepository;
+import com.solucao.transacoes.infraestrutura.adaptador.banco.jparepository.TransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -50,7 +50,7 @@ public class TransactionService {
     }
 
     //TODO: deve ser um regra da service AccountService - metodo privado nao e bom para teste
-    private Account updateAvailableCreditLimit(Transaction transaction, Account account) throws RuntimeException {
+    private AccountJpaEntity updateAvailableCreditLimit(Transaction transaction, AccountJpaEntity account) throws RuntimeException {
 
         if(transaction.getAmount().abs().compareTo(account.getAvailableCreditLimit()) == 1
                 && transaction.getOperationType().getOperationClassifier().equals("-")){

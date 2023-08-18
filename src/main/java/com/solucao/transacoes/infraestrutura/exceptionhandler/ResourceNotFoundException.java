@@ -1,4 +1,4 @@
-package com.solucao.transacoes.exception.exceptionhandler;
+package com.solucao.transacoes.infraestrutura.exceptionhandler;
 
 public class ResourceNotFoundException extends RuntimeException {
     public ResourceNotFoundException(String msg) {

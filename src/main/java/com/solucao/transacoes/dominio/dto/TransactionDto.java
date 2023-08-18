@@ -1,4 +1,4 @@
-package com.solucao.transacoes.dto;
+package com.solucao.transacoes.dominio.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotNull;

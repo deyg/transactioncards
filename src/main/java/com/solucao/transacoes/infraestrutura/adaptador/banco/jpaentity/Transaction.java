@@ -1,4 +1,4 @@
-package com.solucao.transacoes.model;
+package com.solucao.transacoes.infraestrutura.adaptador.banco.jpaentity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -23,7 +23,7 @@ public class Transaction {
     private Long id;
 
     @ManyToOne
-    private Account account;
+    private AccountJpaEntity account;
 
     @ManyToOne
     private OperationType operationType;

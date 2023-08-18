@@ -1,11 +1,11 @@
 package com.solucao.transacoes.integration;
 
-import com.solucao.transacoes.model.Account;
-import com.solucao.transacoes.model.OperationType;
-import com.solucao.transacoes.model.Transaction;
-import com.solucao.transacoes.repository.AccountRepository;
-import com.solucao.transacoes.repository.OperationTypeRepository;
-import com.solucao.transacoes.repository.TransactionRepository;
+import com.solucao.transacoes.infraestrutura.adaptador.banco.jpaentity.AccountJpaEntity;
+import com.solucao.transacoes.infraestrutura.adaptador.banco.jpaentity.OperationType;
+import com.solucao.transacoes.infraestrutura.adaptador.banco.jpaentity.Transaction;
+import com.solucao.transacoes.infraestrutura.adaptador.banco.jparepository.AccountRepository;
+import com.solucao.transacoes.infraestrutura.adaptador.banco.jparepository.OperationTypeRepository;
+import com.solucao.transacoes.infraestrutura.adaptador.banco.jparepository.TransactionRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -50,7 +50,7 @@ public class DataBaseChargeTest {
     void criarConta(){
 
         if(!accountRepository.findByDocumentNumber(documentNumber).isPresent())
-            accountRepository.save(new Account(null,documentNumber, new BigDecimal("5000")));
+            accountRepository.save(new AccountJpaEntity(null,documentNumber, new BigDecimal("5000")));
 
         var account = accountRepository.findByDocumentNumber(documentNumber).get();
     }

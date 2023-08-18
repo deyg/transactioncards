@@ -1,4 +1,4 @@
-package com.solucao.transacoes.model;
+package com.solucao.transacoes.infraestrutura.adaptador.banco.jpaentity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

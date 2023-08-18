@@ -1,11 +1,16 @@
-package com.solucao.transacoes.dto;
+package com.solucao.transacoes.dominio.entidade;
 
+/*
+TODO: Objetos response e request devem ser criado na
+ infra para mapear o Body.
+ A dependencia JsonProperty deve ser movida para infra
+ */
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -13,9 +18,12 @@ import java.math.BigDecimal;
 
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
-public class AccountDto {
+public class Account {
 
+
+    /*
+    TODO: Dominio nao deve possuir id
+     */
     @JsonProperty("account_id")
     private Long id;
 
@@ -30,5 +38,8 @@ public class AccountDto {
     private BigDecimal availableCreditLimit;
 
 
-
+    public Account(String documentNumber, BigDecimal availableCreditLimit) {
+        this.documentNumber = documentNumber;
+        this.availableCreditLimit = availableCreditLimit;
+    }
 }

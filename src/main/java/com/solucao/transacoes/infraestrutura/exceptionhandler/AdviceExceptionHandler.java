@@ -1,7 +1,7 @@
-package com.solucao.transacoes.exception.exceptionhandler;
+package com.solucao.transacoes.infraestrutura.exceptionhandler;
 
 import com.solucao.transacoes.TransacoesApplication;
-import com.solucao.transacoes.exception.businessexception.AccountDuplicatedBusinessException;
+import com.solucao.transacoes.dominio.businessexception.AccountDuplicatedBusinessException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.support.DefaultMessageSourceResolvable;

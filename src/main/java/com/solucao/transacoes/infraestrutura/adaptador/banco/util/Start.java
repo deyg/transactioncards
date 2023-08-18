@@ -1,14 +1,13 @@
-package com.solucao.transacoes.util;
+package com.solucao.transacoes.infraestrutura.adaptador.banco.util;
 
 import com.solucao.transacoes.TransacoesApplication;
-import com.solucao.transacoes.model.OperationType;
-import com.solucao.transacoes.repository.OperationTypeRepository;
+import com.solucao.transacoes.infraestrutura.adaptador.banco.jpaentity.OperationType;
+import com.solucao.transacoes.infraestrutura.adaptador.banco.jparepository.OperationTypeRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
-import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
 

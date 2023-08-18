@@ -1,4 +1,4 @@
-package com.solucao.transacoes.model;
+package com.solucao.transacoes.infraestrutura.adaptador.banco.jpaentity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -12,7 +12,7 @@ import java.math.BigDecimal;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Account {
+public class AccountJpaEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

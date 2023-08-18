@@ -1,7 +1,7 @@
-package com.solucao.transacoes.controller;
+package com.solucao.transacoes.infraestrutura.adaptador.controladorrest;
 
-import com.solucao.transacoes.dto.TransactionDto;
-import com.solucao.transacoes.service.TransactionService;
+import com.solucao.transacoes.dominio.dto.TransactionDto;
+import com.solucao.transacoes.dominio.aplicacao.TransactionService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

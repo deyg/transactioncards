@@ -1,10 +1,10 @@
 package com.solucao.transacoes.integration;
 
-import com.solucao.transacoes.dto.AccountDto;
-import com.solucao.transacoes.dto.TransactionDto;
-import com.solucao.transacoes.repository.AccountRepository;
-import com.solucao.transacoes.service.AccountService;
-import com.solucao.transacoes.service.TransactionService;
+import com.solucao.transacoes.dominio.dto.TransactionDto;
+import com.solucao.transacoes.dominio.entidade.Account;
+import com.solucao.transacoes.dominio.porta.AccountUseCasePort;
+import com.solucao.transacoes.infraestrutura.adaptador.banco.jparepository.AccountRepository;
+import com.solucao.transacoes.dominio.aplicacao.TransactionService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,25 +15,29 @@ import java.math.BigDecimal;
 @SpringBootTest
 public class TransactionTest {
 
-    @Autowired
+
     private TransactionService transactionService;
-
-    @Autowired
     private AccountRepository accountRepository;
+    private final AccountUseCasePort accountUseCasePort;
 
     @Autowired
-    private AccountService accountService;
+    public TransactionTest(TransactionService transactionService, AccountRepository accountRepository,
+                           AccountUseCasePort accountUseCasePort) {
+        this.transactionService = transactionService;
+        this.accountRepository = accountRepository;
+        this.accountUseCasePort = accountUseCasePort;
+    }
 
     @Test
     void deveriaPersisitirUmaTransacaoQuantiaNegativa(){
 
-        var accountDto = new AccountDto(null,"99000000099");
+        var accountDto = new Account("99000000099", new BigDecimal("5000.00"));
         var account = accountRepository.findByDocumentNumber(accountDto.getDocumentNumber());
-        if (!account.isPresent()) accountService.createAccount(accountDto);
+        if (!account.isPresent()) accountUseCasePort.createAccount(accountDto);
         var returnedAccount = accountRepository.findByDocumentNumber(accountDto.getDocumentNumber());
 
         TransactionDto transactionDto = new TransactionDto();
-        transactionDto.setAmount(new BigDecimal("500000"));
+        transactionDto.setAmount(new BigDecimal("1.12"));
         transactionDto.setAccountId(returnedAccount.get().getId());
         transactionDto.setOperationTypeId(1L);
 
@@ -45,9 +49,10 @@ public class TransactionTest {
     @Test
     void deveriaPersisitirUmaTransacaoQuantiaPositiva(){
 
-        var accountDto = new AccountDto(null,"99000000099");
-        var account = accountRepository.findByDocumentNumber(accountDto.getDocumentNumber());
-        if (!account.isPresent()) accountService.createAccount(accountDto);
+        var accountDto = new Account("99000000099", new BigDecimal("5000.00"));
+        var account = accountRepository.findByDocumentNumber(accountDto.getDocumentNumber())
+                .orElse(null);
+        if (account==null) accountUseCasePort.createAccount(accountDto);
         var returnedAccount = accountRepository.findByDocumentNumber(accountDto.getDocumentNumber());
 
         TransactionDto transactionDto = new TransactionDto();

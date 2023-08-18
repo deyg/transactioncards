@@ -1,4 +1,4 @@
-package com.solucao.transacoes.exception.businessexception;
+package com.solucao.transacoes.dominio.businessexception;
 
 public class AccountDuplicatedBusinessException extends RuntimeException {
     public AccountDuplicatedBusinessException(String errorMessage){
