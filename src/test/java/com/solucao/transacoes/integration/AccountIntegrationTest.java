@@ -36,14 +36,14 @@ public class AccountIntegrationTest {
             .getLogger(TransacoesApplication.class);
 
     @Autowired
-    private MessageSource message;
+    private static MessageSource message;
 
 
     @BeforeAll
     public static void init(){
 
         AccountRepositoryPort accountRepositoryPort = new AccountRepositoryAdapter(accountRepository, accountMapper);
-        accountUseCasePort = new AccountUseCase(accountRepositoryPort);
+        accountUseCasePort = new AccountUseCase(accountRepositoryPort, message);
         zeroAccountDto = new Account("00000000000", new BigDecimal("5000"));
     }
 

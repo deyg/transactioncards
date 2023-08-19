@@ -5,27 +5,31 @@ import com.solucao.transacoes.dominio.entidade.Account;
 import com.solucao.transacoes.dominio.porta.AccountRepositoryPort;
 import com.solucao.transacoes.dominio.porta.AccountUseCasePort;
 
-//TODO: estas dependencias podem sair daqui. Criar um Configuration
-import org.springframework.beans.factory.annotation.Autowired;
+/*
+TODO: Criar Portas e Adptadores para message
+ retirar dependencia daqui:  org.springframework.context.MessageSource;
+ Caso de Uso nao devem depender de Framworks
+ */
 import org.springframework.context.MessageSource;
-import org.springframework.stereotype.Component;
 
-@Component
 public class AccountUseCase implements AccountUseCasePort {
 
-    @Autowired
-    private MessageSource message;
+    private final MessageSource message;
     private final AccountRepositoryPort accountRepositoryPort;
 
-    @Autowired
-    public AccountUseCase(AccountRepositoryPort accountRepositoryPort) {
+    public AccountUseCase(AccountRepositoryPort accountRepositoryPort,
+                          MessageSource message) {
         this.accountRepositoryPort = accountRepositoryPort;
+        this.message = message;
     }
 
     @Override
     public Account createAccount(Account account) {
+
         if(accountRepositoryPort.exists(account.getDocumentNumber()))
-            throw new AccountDuplicatedBusinessException(message.getMessage("duplicate.account",null,null));
+            throw new AccountDuplicatedBusinessException(
+                    message.getMessage("duplicate.account",null,null));
+
         return accountRepositoryPort.saveAccount(account);
     }
 }
