@@ -33,3 +33,23 @@ Para executar a aplicao se faz necessario uma instancia do banco de dados Mysql.
   
     @Advice Tratamento de Exceptions
  
+#Cleanboot - Refactory
+
+Os mapeadores assumem papel de maior importancia na Cleanboot pois existe a necessidade de transformacao de dados para atender as diversas camadas.
+
+Exemplo das transformacoes da entidade Account:
+
+```java
+public interface AccountMapper {
+    @Mapping(target = "id", ignore = true)
+    AccountJpaEntity toEntity(final Account account);
+    Account toDomain(final AccountJpaEntity accountJpaEntity);
+    AccountResponse fromEntityToResponse(AccountJpaEntity entity);
+    Account fromRequestToDomain(AccountRequest accountRequest);
+}
+```
+
+
+
+
+
