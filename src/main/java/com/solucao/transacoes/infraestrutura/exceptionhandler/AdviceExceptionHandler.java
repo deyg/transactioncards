@@ -2,6 +2,7 @@ package com.solucao.transacoes.infraestrutura.exceptionhandler;
 
 import com.solucao.transacoes.TransacoesApplication;
 import com.solucao.transacoes.dominio.businessexception.AccountDuplicatedBusinessException;
+import com.solucao.transacoes.dominio.businessexception.BusinessException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
@@ -29,6 +30,14 @@ public class AdviceExceptionHandler extends ResponseEntityExceptionHandler {
 
     private static Logger LOG = LoggerFactory
             .getLogger(TransacoesApplication.class);
+
+    @ExceptionHandler(BusinessException.class)
+    public ResponseEntity<Object> businessException(
+            BusinessException ex, WebRequest request) {
+
+        return getObjectResponseEntity(HttpStatus.BAD_REQUEST, ex.getMessage());
+
+    }
 
     @ExceptionHandler(AccountDuplicatedBusinessException.class)
     public ResponseEntity<Object> accountDuplicatedBusinessException(

@@ -1,34 +1,33 @@
 package com.solucao.transacoes.dominio.entidade;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.solucao.transacoes.dominio.businessexception.BusinessException;
+import lombok.Getter;
+
 import java.math.BigDecimal;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
+@Getter
 public class Account {
 
-    /*
-     @JsonProperty pode ser colocado em um Request
-     ver o impacto nas validacoes.
-     */
-
-    @NotEmpty(message = "The document number should not be empty")
-    @NotBlank(message = "The document number should not be a blank space")
-    @Size(max = 11, min = 11, message = "Invalid Document Number, Size should be 11")
-    @Pattern(regexp = "^[0-9]+$", message = "The document number should only contain numbers")
-    @JsonProperty("document_number")
     private String documentNumber;
-
-    @JsonProperty("available_creditLimit")
     private BigDecimal availableCreditLimit;
 
+    private Account(){}
 
+    public Account(String documentNumber, BigDecimal availableCreditLimit) {
+
+        if(documentNumber == null)
+            throw new BusinessException("O número do documento não deveria ser null.");
+
+        if(documentNumber.isEmpty() || documentNumber.isBlank())
+            throw new BusinessException("O número do documento não deveria ser vazio.");
+
+        if(!documentNumber.matches("^[0-9]+$"))
+            throw new BusinessException("O número do documento deveria conter apenas dígitos.");
+
+        if(documentNumber.length() != 11)
+            throw new BusinessException("O número do documento deveria conter 11 dígitos.");
+
+        this.documentNumber = documentNumber;
+        this.availableCreditLimit = availableCreditLimit;
+    }
 }
