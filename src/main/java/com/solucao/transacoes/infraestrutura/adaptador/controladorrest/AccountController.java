@@ -1,6 +1,5 @@
 package com.solucao.transacoes.infraestrutura.adaptador.controladorrest;
 
-import com.solucao.transacoes.dominio.entidade.Account;
 import com.solucao.transacoes.dominio.porta.AccountUseCasePort;
 import com.solucao.transacoes.infraestrutura.adaptador.banco.jpaentity.AccountJpaEntity;
 import com.solucao.transacoes.infraestrutura.adaptador.banco.jparepository.AccountRepository;
@@ -43,12 +42,9 @@ public class AccountController {
     public ResponseEntity<AccountResponse> createAccount(@RequestBody AccountRequest accountRequest)
             throws Exception {
 
-        Account account = accountMapper.fromRequestToDomain(accountRequest);
-        accountUseCasePort.createAccount(account);
-        AccountJpaEntity accountJpaEntity =
-                accountRepository.findByDocumentNumber(accountRequest.getDocumentNumber()).get();
-
-        return new ResponseEntity<AccountResponse>
-                (accountMapper.fromEntityToResponse(accountJpaEntity), HttpStatus.CREATED);
+        accountUseCasePort.createAccount(accountMapper.fromRequestToDomain(accountRequest));
+        return new ResponseEntity<AccountResponse>(accountMapper.fromEntityToResponse(
+                accountRepository.findByDocumentNumber(
+                        accountRequest.getDocumentNumber()).get()), HttpStatus.CREATED);
     }
 }
